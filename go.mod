@@ -1,0 +1,20 @@
+module github.com/elaletovic/slacksnitch
+
+go 1.19
+
+require (
+	github.com/sethvargo/go-githubactions v1.1.0
+	github.com/shurcooL/githubv4 v0.0.0-20230215024106-420ad0987b9b
+	github.com/slack-go/slack v0.12.1
+	golang.org/x/oauth2 v0.5.0
+)
+
+require (
+	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/gorilla/websocket v1.4.2 // indirect
+	github.com/sethvargo/go-envconfig v0.8.0 // indirect
+	github.com/shurcooL/graphql v0.0.0-20220606043923-3cf50f8a0a29 // indirect
+	golang.org/x/net v0.6.0 // indirect
+	google.golang.org/appengine v1.6.7 // indirect
+	google.golang.org/protobuf v1.28.0 // indirect
+)
