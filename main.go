@@ -2,11 +2,12 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/elaletovic/slacksnitch/queries"
 	"github.com/sethvargo/go-githubactions"
 	"github.com/shurcooL/githubv4"
-	_ "github.com/slack-go/slack"
+	"github.com/slack-go/slack"
 	"golang.org/x/oauth2"
 )
 
@@ -32,7 +33,7 @@ func main() {
 	githubactions.Infof("slack channel: %v", slackChannel)
 
 	// slack client
-	//slackClient := slack.New(slackAccessToken)
+	slackClient := slack.New(slackAccessToken)
 
 	//get GH client
 	src := oauth2.StaticTokenSource(
@@ -61,4 +62,11 @@ func main() {
 
 	githubactions.Infof("vulnerability query: %v", queries.VulnerabilityQuery)
 
+	payload, err := json.Marshal(&queries.VulnerabilityQuery)
+	if err != nil {
+		githubactions.Fatalf("failed to marshal the vulnerability query, error :%v", err)
+	} else {
+		a, b, c, err := slackClient.SendMessage("security-alerts", slack.MsgOptionText(string(payload), true))
+		githubactions.Infof("a: %s, b: %s, c: %s, err: %v", a, b, c, err)
+	}
 }
