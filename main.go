@@ -27,6 +27,10 @@ func main() {
 		githubactions.Fatalf("missing input 'slack_channel'")
 	}
 
+	githubactions.Infof("github access token: %v", githubAcessToken)
+	githubactions.Infof("slack access token: %v", slackAccessToken)
+	githubactions.Infof("slack channel: %v", slackChannel)
+
 	// slack client
 	//slackClient := slack.New(slackAccessToken)
 
@@ -40,7 +44,7 @@ func main() {
 
 	gCtx, err := githubactions.Context()
 	if err != nil {
-		githubactions.Fatalf("could not get context for this action")
+		githubactions.Fatalf("could not get context for this action, error: %v", err)
 	}
 
 	owner, repository := gCtx.Repo()
