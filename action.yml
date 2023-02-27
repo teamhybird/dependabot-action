@@ -1,12 +1,11 @@
 name: Vulnerability alerts
 inputs:
-  secrets:
-    github_access_token: 
-      description: "Enter your Github access token here"
-      required: true
-    slack_access_token:
-      description: "Enter your Slack access token here" 
-      required: true
+  github_access_token: 
+    description: "Enter your Github access token here"
+    required: true
+  slack_access_token:
+    description: "Enter your Slack access token here" 
+    required: true
   slack_channel:
     required: true
 
