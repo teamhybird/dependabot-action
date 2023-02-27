@@ -52,7 +52,7 @@ func main() {
 	values := map[string]interface{}{
 		"owner": githubv4.String(owner),
 		"name":  githubv4.String(repository),
-		"count": 30,
+		"count": githubv4.Int(30),
 	}
 
 	err = githubClient.Query(context.Background(), &queries.VulnerabilityQuery, values)
