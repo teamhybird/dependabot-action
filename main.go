@@ -62,6 +62,12 @@ func main() {
 
 	githubactions.Infof("vulnerability query: %v", queries.VulnerabilityQuery)
 
+	if queries.VulnerabilityQuery.Repository.VulnerabilityAlerts != nil {
+		for _, edge := range queries.VulnerabilityQuery.Repository.VulnerabilityAlerts.Edges {
+			githubactions.Infof("node ID %v, severity %v", edge.Node.ID, edge.Node.SecurityAdvisory.Severity)
+		}
+	}
+
 	payload, err := json.Marshal(&queries.VulnerabilityQuery)
 	if err != nil {
 		githubactions.Fatalf("failed to marshal the vulnerability query, error :%v", err)
