@@ -42,6 +42,7 @@ func main() {
 	githubactions.Infof("github access token: %v", githubAcessToken)
 	githubactions.Infof("slack access token: %v", slackAccessToken)
 	githubactions.Infof("slack channel: %v", slackChannel)
+	githubactions.Infof("number of items: %v", numberOfItems)
 
 	// slack client
 	slackClient := slack.New(slackAccessToken)
