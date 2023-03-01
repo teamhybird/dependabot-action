@@ -72,7 +72,7 @@ func main() {
 	if query.Repository.VulnerabilityAlerts != nil && len(query.Repository.VulnerabilityAlerts.Edges) > 0 {
 
 		blocks := query.GetMessage()
-		a, b, c, err := slackClient.SendMessage("security-alerts", slack.MsgOptionBlocks(blocks.BlockSet...))
+		a, b, c, err := slackClient.SendMessage("security-alerts", slack.MsgOptionBlocks(blocks...))
 		githubactions.Infof("a: %s, b: %s, c: %s, err: %v", a, b, c, err)
 	}
 }
