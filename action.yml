@@ -9,6 +9,8 @@ inputs:
       required: true
   slack_channel:
     required: true
+  number_of_records:
+    required: false
 
 runs:
   using: docker

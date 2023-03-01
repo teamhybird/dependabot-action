@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/elaletovic/slacksnitch/models"
 	"github.com/sethvargo/go-githubactions"
@@ -25,6 +26,17 @@ func main() {
 	slackChannel := githubactions.GetInput("slack_channel")
 	if slackChannel == "" {
 		githubactions.Fatalf("missing input 'slack_channel'")
+	}
+
+	numberOfItems := 20
+	count := githubactions.GetInput("number_of_records")
+	if count != "" {
+		val, err := strconv.Atoi(count)
+		if err != nil || val <= 0 {
+			githubactions.Fatalf("'number_of_records' must be an integer bigger than zero")
+		} else {
+			numberOfItems = val
+		}
 	}
 
 	githubactions.Infof("github access token: %v", githubAcessToken)
@@ -51,7 +63,7 @@ func main() {
 	values := map[string]interface{}{
 		"owner": githubv4.String(owner),
 		"name":  githubv4.String(repository),
-		"count": githubv4.Int(30),
+		"count": githubv4.Int(numberOfItems),
 	}
 
 	var query models.VulnerabilityQuery
@@ -62,12 +74,6 @@ func main() {
 	}
 
 	githubactions.Infof("vulnerability query: %v", query)
-
-	if query.Repository.VulnerabilityAlerts != nil {
-		for _, edge := range query.Repository.VulnerabilityAlerts.Edges {
-			githubactions.Infof("node ID %v, severity %v", edge.Node.ID, edge.Node.SecurityAdvisory.Severity)
-		}
-	}
 
 	if query.Repository.VulnerabilityAlerts != nil && len(query.Repository.VulnerabilityAlerts.Edges) > 0 {
 
