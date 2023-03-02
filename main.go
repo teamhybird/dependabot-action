@@ -79,7 +79,7 @@ func main() {
 	if query.Repository.VulnerabilityAlerts != nil && len(query.Repository.VulnerabilityAlerts.Edges) > 0 {
 
 		blocks := query.GetMessage()
-		_, _, _, err := slackClient.SendMessage("security-alerts", slack.MsgOptionBlocks(blocks...))
+		_, _, _, err := slackClient.SendMessage(slackChannel, slack.MsgOptionBlocks(blocks...))
 		if err != nil {
 			githubactions.Fatalf("failed to send Slack message, error: %v", err)
 		}
