@@ -1,4 +1,4 @@
-# slacksnitch
+# dependabot-action
 Github action that sends Dependabot vulnerability alerts to Slack.
 
 ## Description
@@ -17,7 +17,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: elaletovic/slacksnitch@main
+      - uses: teamhybird/dependabot-action@main
         with:
           github_access_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           slack_access_token: ${{ secrets.SLACK_ACCESS_TOKEN }}
